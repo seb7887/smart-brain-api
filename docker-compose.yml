@@ -9,12 +9,21 @@ services:
     working_dir: /usr/src/smart-brain-api
     environment:
       POSTGRES_URI: postgres://postgres:@postgres:5432/smartbrain
+      REDIS_URI: redis://redis:6379
     links:
       - postgres
+      - redis
     ports:
       - "8081:8081"
     volumes:
       - ./:/usr/src/smart-brain-api
+
+  # Redis
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
 
   #Postgres
   postgres:
